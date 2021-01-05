@@ -58,3 +58,54 @@ console.log(monty.hasOwnProperty('Homo Sapiens')); //false is is a prototype not
 //you can check in dev tools, it will be in __proto__, under the objects set properties
 
 lucy.calcAge();
+
+console.dir(Person.prototype.constructor);
+
+//arrays
+
+const arr = [223,223,35,55,55,55,55,2,2,2,2,2,23];
+
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype); //true
+
+console.log(arr.__proto__.__proto__);
+
+
+//you could add a new property(make your own) to the Array.prototype and use this custom property in your workflow
+//just for an experiment but shouldn't do this,could cause lots of confusion on a team etc ...
+Array.prototype.unique = function(){
+  return [... new Set(this)];
+}
+
+console.log(arr.unique());
+
+console.dir(x => x + 1);
+
+// coding challenge   
+
+const Car = function(make,speed){
+  this.make = make; 
+  this.speed = speed;
+}
+
+Car.prototype.accelerate = function() {
+  this.speed += 10;
+  console.log(`The ${this.make} is traveling ${this.speed}`);
+
+}
+
+Car.prototype.accelerate = function() {
+  this.speed -= 5;
+  console.log(`The ${this.make} is traveling ${this.speed}`);
+
+}
+
+const BMW = new Car('BMW', 120);
+const Mercedes = new Car('Mercedes', 95);
+
+// console.log(BMW);
+// console.log(Mercedes);
+
+BMW.accelerate();
+Mercedes.accelerate();
+
