@@ -109,3 +109,82 @@ const Mercedes = new Car('Mercedes', 95);
 BMW.accelerate();
 Mercedes.accelerate();
 
+// static methods 
+
+
+//Object.create
+//connects the created object prototype to the object
+const protoPerson = {
+  calcAge() {
+    console.log(2037 - this.birthyear);
+  },
+  //this looks like a constructor but it just a plain function,not using new but is a way of 
+  //this will point to the sarah object because we explicitly called init
+  //just a manual way to intialize the object
+  //doesn't have to be named init - could be anything
+  init(firstname,birthyear){
+    this.firstname = firstname;
+    this.birthyear = birthyear;
+  }
+};
+
+const steven = Object.create(protoPerson);
+steven.name = 'Steven';
+steven.birthyear = 1432;
+steven.calcAge()
+console.log(steven);
+
+console.log(steven.__proto__ === protoPerson); //true
+
+//code challenge 2
+//remember you use the class declaration
+// const Cars = class {}
+
+class Cars {
+  constructor(make,speed){
+    this.make = make; 
+    this.speed = speed;
+  }
+
+  get speedUS(){
+    return this.speed / 1.6;
+  };
+  //set always takes 1 argument
+  set speedUS(speed){
+    return this.speed = speed * 1.6;
+
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`The ${this.make} is traveling ${this.speed}`);
+  }
+  decelerate() {
+    this.speed -= 5;
+    console.log(`The ${this.make} is traveling ${this.speed}`);
+  }
+}
+
+
+const BMW2 = new Cars('BMW',120);
+const mercedes = new Cars('mercedes',50);
+const ford = new Cars('ford',120);
+
+console.log(BMW2.speed);
+BMW2.accelerate();
+BMW2.accelerate();
+BMW2.decelerate();
+
+console.log(mercedes.speed);
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.decelerate();
+
+console.log(ford.speed);
+ford.accelerate();
+ford.accelerate();
+ford.decelerate();
+
+
+ford.speedUS = 50;
+console.log(ford);
